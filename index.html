@@ -1,0 +1,123 @@
+<!-- 主显示页面和抽奖页面 -->
+<!-- 在布局方面主要是动画的实现和弹框的实现   动画的出场顺序很重要  让产品用户有着流畅完美的体验正是商品促销通过游戏推广的初衷  由于是手机端小游戏  在页面上尽量少  用户进入这个游戏  就是要即刻展示此游戏的目的  所以弹窗的出现就是为了显示更多的信息  而用户却不跳转页面 -->
+<!-- 逻辑方面  是抽奖的一个随机数  为了用户体验 抽奖盘开始是由慢到快  结束时是由快到慢 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<!-- 手机端的适配 -->
+		<!-- 手机端屏幕适配 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">      
+        <meta http-equiv="Cache-Control" CONTENT="no-cache">
+        <!-- 引入外部css 全局 -->
+        <link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<title>摇奖</title>
+	</head>
+	<body style="background-color: #c9010e;">
+			<!--预加载-->
+		<div id="loading-mask"></div>
+		<div class="load4" id="loading">
+		<!-- 提升用户体验 让用户有了视觉上的缓冲 -->
+		<div class="loader">Loading...</div>
+        </div>
+        <!--预加载-->
+          <!--音乐播放标签-->
+         <audio src="images/music.mp3" controls="controls" loop="loop" preload id="music1" autoplay="autoplay" hidden></audio>
+         <!-- 对应js  。music-icon有点击事件 控制暂停播放 jq -->
+         <div class="music-icon rotate"></div>
+         <!--背景图片-->	
+		<div class="bg page1-bg1">
+			<img src="images/page1bg1.jpg"/>
+		</div>
+		<div class="bg page1-bg2">
+			<img src="images/page1-bg2.png"/>
+		</div>
+		<div class="bg page1-bg3">
+			<img src="images/page1-of1.png"/>
+		</div>
+		<img src="images/logo.png" class="page1-logo rel"/>	
+		
+		<div class="page1-content rel">
+			<img src="images/page1-title.png" class="page1-title"/>
+			<!-- 点击事件 跳转到page2.html -->
+			<p class="page1-start-btn" onclick="window.location.href='page2.html'">开始抽奖</p>
+			<!-- 。page1-tip对应js有点击事件 -->
+			<center class="page1-tip">活动说明&gt;&gt;</center>
+		</div>
+		<!-- 活动展示 -->
+		<div class="pop tip-pop">
+		 <!-- .close对应js有点击事件 -->
+			<img src="images/close.png" class="abs close tip-close "/>
+			<h1 class="pop-title">活动说明</h1>
+			<div class="white rel pb60 pop-content">
+				<img src="images/pop-bg.png" class="abs pop-bg index-pop-bg"/>
+				<!-- z-index: 2; 让此div在最上面显示 活动规则 -->
+				<div class="p10 mb30 rel" style="z-index: 2;">
+					<div class="clear">
+					<span class="fl f-bred">1.</span>
+				    <p class="fr per95 f-bred">活动时间：2017.1.1-12.31日,领奖时间：抽奖当日。</p>	
+					</div>
+					<div class="clear">
+					<span class="fl f-bred">2.</span>
+				    <p class="fr per95 f-bred">开始游戏后点击“开始”按钮进行摇奖,点击“结束”按钮后滚动逐渐停止,当处于中间红线处的三个图片一致时才能获得对应奖品。</p>	
+					</div>
+					<div class="clear">
+					<span class="fl f-bred">3.</span>
+				    <p class="fr per95 f-bred">玩家抽中的礼品将会以礼券形式自动存入洛阳师范学院公众号“我的礼包”菜单里面,未关注公众号的玩家点击“我的奖品”按钮进行关注后才能查看所获得的奖品。</p>	
+					</div>
+					<div class="clear">
+					<span class="fl f-bred">4.</span>
+				    <p class="fr per95 f-bred">每位玩家每天有3次摇奖机会,机会用完后转发到朋友圈可额外获得2次机会，每人每天最多玩5次。</p>	
+					</div>
+					<div class="clear">
+					<span class="fl f-bred">5.</span>
+				    <p class="fr per95 f-bred">获得礼券的顾客请于抽取奖品起三个工作日内,在营业时间范围内前往领取，凭借“我的礼包”内电子券进行兑换,非工作人员请勿自行操作礼券,截图无效过期作废。</p>	
+					</div>
+					<div class="clear">
+					<span class="fl f-bred">6.</span>
+				    <p class="fr per95 f-bred">本活动最终解释权归洛阳师范学院所有。</p>	
+					</div>
+			</div>
+			</div>
+		</div>
+		<!-- 活动展示 -->
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		 
+// thisURL = document.URL;  
+// strwrite = 
+// "<img src='https://chart.googleapis.com/chart?cht=qr&chs=150x150&choe=UTF-8&chld=L|4&chl="
+//  + thisURL + "' width='150' height='150' alt='网址URL 二维码生成' />"; 
+// document.write( strwrite );  
+ 
+		$(function(){
+			//预加载  主要是用户体验
+				$("#loading-mask").hide();
+			    $("#loading").hide();
+		})
+		
+			$(window).load(function(){
+			//播放/暂停音乐
+	            $(".music-icon").click(function(){
+	            var audio = document.getElementById('music1'); 
+                if(audio!==null){             
+                if(audio.paused){ audio.play();} // 播放
+               else{audio.pause();} //暂停
+                }
+	            $(this).toggleClass("rotate");
+	               $(this).toggleClass("music-shift");		 
+	            })	
+				//关闭弹窗
+				$(".close").click(function(){
+					$(this).parent(".pop").slideUp(300);
+				})
+				//活动说明弹出
+				$(".page1-tip").on("click",function(){
+				  $(".tip-pop").fadeIn(300);
+				})
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<!-- 手机端适配 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">      
+        <meta http-equiv="Cache-Control" CONTENT="no-cache">
+        <link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<title>摇奖</title>	
+		<script src="load_lufylegend.js" type="text/javascript"></script>
+		<script src="js/Reel.js" type="text/javascript"></script>
+		<script src="js/Main.js" type="text/javascript"></script>
+	</head>
+	<script>	
+	// 屏幕宽度适配
+    var device_width =document.documentElement.clientWidth;
+    if(LGlobal.canTouch){
+	LGlobal.stageScale = LStageScaleMode.EXACT_FIT;
+    LSystem.screen(device_width/720);
+        }
+    </script>
+	<body>
+		<!--预加载-->
+		<div id="loading-mask"></div>
+		<div class="load4" id="loading">
+		<div class="loader">Loading...</div>
+        </div>
+        <!--预加载-->
+         <!--音乐-->
+         <audio src="images/music.mp3" controls="controls" loop="loop" preload id="music1" autoplay="autoplay" hidden></audio>
+         <div class="music-icon rotate"></div>
+         <!--音乐-->	
+		<div class="bg">
+         	<img src="images/page2bg.jpg"/>
+         </div>
+         <img src="images/logo.png" class="page2-logo abs"/>
+		<div id="mylegend" class="rel">loading……</div>
+		<div class="page2-content">
+			<div class="page2-inner">
+			<!-- 奖品展示区 -->
+				<img src="images/giftshow.png" class="mb10"/>
+				<!-- 获奖展示区的样式 -->
+			<div class="pt10 white pb10 mb20 pl5 pr5 border-radius3">
+				<div class="result-box clear pl5 pr5 pt10 pb10">
+				<div class="txtMarquee-top">
+			<div class="bd">
+				<div class="listWrap">
+					<ul class="list">
+						<li class="first"><span class="f-red">恭喜！ 手机号133****3478</span>&nbsp;&nbsp;&nbsp;幸运抽到心相印手帕纸</li>
+						<li><span class="f-red">恭喜！ 手机号136****3478</span>&nbsp;&nbsp;&nbsp;幸运抽到立白洗衣皂</li>
+						<li><span class="f-red">恭喜！ 手机号133****3478</span>&nbsp;&nbsp;&nbsp;幸运抽到7D超级电影票</li>
+						<li><span class="f-red">恭喜！ 手机号159****6902</span>&nbsp;&nbsp;&nbsp;幸运抽到果然CC现做奶茶</li>
+						<li><span class="f-red">恭喜！ 手机号131****5743</span>&nbsp;&nbsp;&nbsp;幸运抽到家具童话毛巾</li>						
+					</ul>
+				</div>
+
+			</div>
+		</div>				
+			</div>
+			</div>
+			</div>
+		</div>
+		<!--二维码弹出-->
+		<div class="pop twocode-pop" style="display: block;">
+			<img src="images/close.png" class="abs close twocode-close"/>
+			<h1 class="pop-title">二维码</h1>
+			<div class="white rel pb40 pop-content">
+				<img src="images/pop-bg.png" class="abs pop-bg"/>
+				<div class="p10 mb20" style="z-index: 2;">
+					
+			<img src="images/twocode.jpg" class="twocode"/>
+			<center class="f-bred2">关注洛阳师范学院微信公众号</center>
+			<center class="f-bred2">才可以拿到奖品哦</center>			
+			</div>
+			</div>
+		</div>
+		<!--温馨提示弹出-->
+		<div class="loading-mask" style="z-index:9; display: none;"></div>
+		<div class="pop end-pop" style="display:none; z-index: 12;">
+			<img src="images/close.png" class="abs close tip-close"/>
+			<h1 class="pop-title">温馨提示</h1>
+			<div class="white rel pop-content">
+				<img src="images/pop-bg.png" class="abs pop-bg"/>
+				<div class="p10 pb60 rel" style="z-index: 2; padding-bottom: 60px;">
+					
+			<img src="images/twocode.jpg" class="twocode"/>
+			<center class="f-bred2">亲，今天次数用完了，明天再来吧。</center>
+			<center class="f-bred2">(进入公众号>卡友尊宠>我的礼品菜单)</center>									
+			<center class="f-bred2">长按二维码去看看“我的礼品”吧！</center>	
+			</div>
+			</div>
+		</div>
+		<!--奖品弹出-->
+		<div class="pop score-pop">
+			<img src="images/close.png" class="abs close score-close"/>
+			<h1 class="pop-title">获得奖品</h1>
+			<div class="white rel pb40 pop-content">
+				<img src="images/pop-bg.png" class="abs pop-bg"/>
+				<div class="p10">
+			<img src="images/5.png" class="score"/>
+			<center class="f-bred2">恭喜您！抽中家具童话 毛巾</center>
+			<p class="confirm-btn twocode-btn">确认领取</p>
+			</div>
+			</div>
+		</div>
+		<!--未中奖弹出-->
+		<div class="pop fail-pop">
+			<img src="images/close.png" class="abs close score-close"/>
+			<h1 class="pop-title">什么都没有</h1>
+			<div class="white rel pb40 pop-content">
+				<img src="images/pop-bg.png" class="abs pop-bg"/>
+				<div class="p10">
+			<img src="images/face1.png" class="face"/>
+			<center class="f-bred2 mb40">别灰心!<br>
+下一次肯定会有惊喜的！</center>
+           <p class="confirm-btn share-mask">分享</p>
+			</div>
+			</div>
+		</div>
+		<!--分享弹出-->
+		<div class="share-mask">
+			<img src="images/share-top1.png" class="share-top1"/>
+			<div class="share-top2 rel">
+			    <img src="images/share-top2.png"/>
+			    <img src="images/adorn1.png" class="abs adorn1"/>
+			    <img src="images/adorn1.png" class="abs adorn2"/>
+			</div>
+		</div>
+		
+		<script src="js/jquery.js" type="text/javascript"></script>
+		<script src="js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.SuperSlide.2.1.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(function(){
+			//预加载
+				$("#loading-mask").hide();
+			    $("#loading").hide();
+		})
+			$(window).load(function(){
+				//播放/暂停音乐
+				 $(".music-icon").on('tap', function(e){
+	            var audio = document.getElementById('music1'); 
+                if(audio!==null){             
+                if(audio.paused){ audio.play();}
+               else{audio.pause();} 
+                }
+	            $(this).toggleClass("rotate");
+	            })	
+		    //文字滚动.slide
+			$(".txtMarquee-top").slide({mainCell:".bd .listWrap",autoPlay:true,effect:"topMarquee",vis:1,interTime:50});
+			//canvas高度
+			$("#mylegend").height($("#mylegend_canvas").height());
+			//追加一个图片
+			$("#mylegend").append("<img src='images/line.png' class='game-line abs'/>");
+ 			//打开二维码弹窗 
+            $(".twocode-btn").on('tap', function(e){
+                $(".score-pop").hide(300);	
+                $(".twocode-pop").show(300);	
+             })
+            //关闭二维码弹窗
+            $(".close").on('tap', function(e){
+                $(this).parents(".pop").slideUp(300);	
+                $(".loading-mask").fadeOut(200);
+             })
+            //关闭奖品弹窗
+            $(".score-close").on('tap', function(e){
+                $(".score-pop").slideUp(300);	
+             })
+			//分享弹出
+			// $(".mask").slideDown(300);
+			$(".share-mask").on('tap',function(e){
+				$(".fail-pop").hide(300);
+				$(".share-mask").show(300);
+			})
+			// 分享关闭
+            $(".share-mask").on('tap', function(e){
+            	$(this).hide(300);
+            })
+            //结束
+            //$(".loading-mask").fadeIn(300);
+            //$(".end-pop").slideDown(100);
+			})
+		</script>
+	</body>
+</html>
